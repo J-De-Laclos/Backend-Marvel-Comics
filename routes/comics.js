@@ -21,6 +21,19 @@ router.get("/comics", async (req, res) => {
   }
 });
 
+//Route COMICS INFO
+router.get("/comic/:comicId", async (req, res) => {
+  try {
+    // console.log(req.params);
+    const response = await axios.get(
+      `https://lereacteur-marvel-api.herokuapp.com/comic/${req.params.comicId}?apiKey=${process.env.API_KEY}`
+    );
+    return res.status(201).json(response.data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 // Route Get COMICS INCLUING CHARACTER
 
 router.get("/comics/character/:id", async (req, res) => {
